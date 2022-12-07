@@ -14,6 +14,7 @@ gem5_dev = "gem5-dev"
 #get current directory
 cwd = os.getcwd()
 
+
 ##functions
 #function to clone gemg-dev from github
 def clone_gem5_dev():
@@ -31,7 +32,13 @@ def fix_for_arm():
     #the file is gem5-wd/source/src/arch/arm/kvm/gic.cc
     #replace the file with the fixed file, which is in the current directory and with the same name
     shutil.copyfile("gic.cc", "gem5-wd/source/src/arch/arm/kvm/gic.cc")
-    
+#function which starts docker if it's not already running
+def start_docker():
+    #if it's not running, start it
+    #check if the machine is a linux machine -- if not, don't start docker
+    if platform.system() == "Linux":
+        subprocess.run(["systemctl", "--user", "start", "docker.service"])
+
 
 
 #This is a script to prepare the gem5 simulator for full-system simulation
@@ -60,6 +67,8 @@ if not os.path.isdir("gem5-wd"):
     os.mkdir("gem5-wd")
 
 ##DOCKER BUILD
+#if docker is not running, start it
+
 #change to the gem5-dev directory
 os.chdir("gem5-dev")
 #build the docker container
