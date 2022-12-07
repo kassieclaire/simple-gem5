@@ -77,7 +77,9 @@ if is_arm():
 #download the disk image and kernel using the install-system script
 print("Downloading disk image and kernel...")
 #use os.system instead of subprocess.run because the script is interactive
-os.system(f"docker run --rm -v {cwd}/{gem5_wd}:/gem5 -it {gem5_dev} install-system")
+os.system(f"docker run --rm -v \"{cwd}/{gem5_wd}:/gem5\" -it {gem5_dev} install-system")
+#print out the bash command above
+print(f"docker run --rm -v \"{cwd}/{gem5_wd}:/gem5\" -it {gem5_dev} install-system")
 
 ##GEM5 BUILD
 #build the simulator (currently set to ARM 4-core)
