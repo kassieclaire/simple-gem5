@@ -92,10 +92,10 @@ int main(int argc, char *argv[])
 
     cout << "Done." << endl;
 
-    // cout << "Matrix A:" << endl;
-    // printMatrix(A, size);
-    // cout << "Matrix B:" << endl;
-    // printMatrix(B, size);
+    cout << "Matrix A:" << endl;
+    printMatrix(A, size);
+    cout << "Matrix B:" << endl;
+    printMatrix(B, size);
 
     cout << "Beginning multiply...";
 
@@ -103,9 +103,9 @@ int main(int argc, char *argv[])
     multiply(A, B, C, size);
     m5_dump_stats(0, 0);
 
-    // cout << "Done." << endl;
-    // cout << "Matrix C:" << endl;
-    // printMatrix(C, size);
+    cout << "Done." << endl;
+    cout << "Matrix C:" << endl;
+    printMatrix(C, size);
 
     delete[] A;
     delete[] B;

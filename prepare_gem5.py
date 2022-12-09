@@ -4,6 +4,7 @@ import subprocess
 import re
 import platform
 import shutil
+import sys
 
 ##defines
 #git links
@@ -39,7 +40,12 @@ def start_docker():
     if platform.system() == "Linux":
         subprocess.run(["systemctl", "--user", "start", "docker.service"])
 
-
+#Check for no-build argument
+if len(sys.argv) > 1:
+    if sys.argv[1] == "--no-build":
+        no_build = True
+    else:
+        no_build = False
 
 #This is a script to prepare the gem5 simulator for full-system simulation
 #It will download the gem5 simulator, set up a docker container, and build the simulator
@@ -76,6 +82,8 @@ subprocess.run(["docker", "build", "-t", gem5_dev, "docker"])
 #change back to the gem5 directory
 os.chdir("..")
 
+if (no_build):
+    sys.exit(0)
 ##SOURCE/SYSTEM INSTALL
 #install the gem5 simulator source code
 print("Installing gem5 source code...")
