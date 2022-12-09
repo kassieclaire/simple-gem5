@@ -41,11 +41,10 @@ def start_docker():
         subprocess.run(["systemctl", "--user", "start", "docker.service"])
 
 #Check for no-build argument
+no_build = False
 if len(sys.argv) > 1:
     if sys.argv[1] == "--no-build":
         no_build = True
-    else:
-        no_build = False
 
 #This is a script to prepare the gem5 simulator for full-system simulation
 #It will download the gem5 simulator, set up a docker container, and build the simulator
