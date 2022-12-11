@@ -51,6 +51,7 @@ if "--no-build" in sys.argv:
 if "--csl" in sys.argv:
     #run the docker engine start command
     #the command is systemctl --user start docker.service
+    print("Starting docker engine...")
     subprocess.run(["systemctl", "--user", "start", "docker.service"])
     sys.argv.remove("--csl")
 #This is a script to prepare the gem5 simulator for full-system simulation
