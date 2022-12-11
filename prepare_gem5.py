@@ -40,12 +40,19 @@ def start_docker():
     if platform.system() == "Linux":
         subprocess.run(["systemctl", "--user", "start", "docker.service"])
 
-#Check for no-build argument
+#Check for no-build and cslab arguments
+#If no-build is present, don't build the gem5 simulator
 no_build = False
-if len(sys.argv) > 1:
-    if sys.argv[1] == "--no-build":
-        no_build = True
-
+#check if the no-build argument is present
+if "--no-build" in sys.argv:
+    no_build = True
+    sys.argv.remove("--no-build")
+#check if the csl argument is present. If it is true, run the docker engine start command
+if "--csl" in sys.argv:
+    #run the docker engine start command
+    #the command is systemctl --user start docker.service
+    subprocess.run(["systemctl", "--user", "start", "docker.service"])
+    sys.argv.remove("--csl")
 #This is a script to prepare the gem5 simulator for full-system simulation
 #It will download the gem5 simulator, set up a docker container, and build the simulator
 #It will also download the disk image and kernel for the simulator
