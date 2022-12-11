@@ -120,7 +120,7 @@ subprocess.run(["docker", "run", "--rm", "-v", f"{cwd}/{gem5_wd}:/gem5", "-it", 
 print("Performing test-run of gem5 simulator in se mode...")
 subprocess.run(["docker", "run", "--rm", "-v", f"{cwd}/{gem5_wd}:/gem5", "-it", gem5_dev, "run-se"])
 #perform a test-run of the simulator in full-system mode (hello world)
-print("Performing test-run of simulator in fs mode...")
-subprocess.run(["docker", "run", "--rm", "-v", f"{cwd}/{gem5_wd}:/gem5", "-it", gem5_dev, "run-fs"])
+#print("Performing test-run of simulator in fs mode...")
+#subprocess.run(["docker", "run", "--rm", "-v", f"{cwd}/{gem5_wd}:/gem5", "-it", gem5_dev, "run-fs"])
 
 
