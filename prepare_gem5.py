@@ -5,6 +5,7 @@ import re
 import platform
 import shutil
 import sys
+import time
 
 ##defines
 #git links
@@ -53,6 +54,10 @@ if "--csl" in sys.argv:
     #the command is systemctl --user start docker.service
     print("Starting docker engine...")
     subprocess.run(["systemctl", "--user", "start", "docker.service"])
+    #wait for the docker engine to start
+    print("Waiting for docker engine to start...")
+    #use python's sleep function to wait for 5 seconds
+    time.sleep(5)
     sys.argv.remove("--csl")
 #This is a script to prepare the gem5 simulator for full-system simulation
 #It will download the gem5 simulator, set up a docker container, and build the simulator
