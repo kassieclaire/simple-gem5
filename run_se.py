@@ -1,4 +1,5 @@
 #Contains a function which runs a binary file with arguments in the gem5 simulator and a script which calls the function with the name of the binary file and the arguments as command line arguments.
+#notes: gem5 simulator arguments include:
 
 import subprocess
 import sys
@@ -14,6 +15,9 @@ def run_se(args):
 #script which calls run_se with the name of the binary file and the arguments as command line arguments
 if __name__ == "__main__":
     #args is all arguments including the name of the file
+    #the name of the file is indicated by a -b flag
+    #the simulator arguments are before the -b flag
+    #the binary file arguments are after the binary file name
     args = sys.argv[1:]
     #run the binary file
     run_se(args)
