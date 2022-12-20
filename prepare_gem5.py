@@ -59,6 +59,12 @@ if "--csl" in sys.argv:
     #use python's sleep function to wait for 5 seconds
     time.sleep(5)
     sys.argv.remove("--csl")
+#check if the fs argument is present. If it is, set the full system flag to true
+full_system = False
+if "--fs" in sys.argv:
+    full_system = True
+    sys.argv.remove("--fs")
+
 #This is a script to prepare the gem5 simulator for full-system simulation
 #It will download the gem5 simulator, set up a docker container, and build the simulator
 #It will also download the disk image and kernel for the simulator
@@ -103,12 +109,12 @@ subprocess.run(["docker", "run", "--rm", "-v", f"{cwd}/{gem5_wd}:/gem5", "-it", 
 #after gem5-source install, if detected host system is ARM, fix the gem5 source code
 if is_arm():
     fix_for_arm()
-#download the disk image and kernel using the install-system script
-print("Downloading disk image and kernel...")
-#use os.system instead of subprocess.run because the script is interactive
-os.system(f"docker run --rm -v \"{cwd}/{gem5_wd}:/gem5\" -it {gem5_dev} install-system")
-#print out the bash command above
-print(f"docker run --rm -v \"{cwd}/{gem5_wd}:/gem5\" -it {gem5_dev} install-system")
+#if full system is true, download the disk image and kernel
+if full_system:
+    #download the disk image and kernel using the install-system script
+    print("Downloading disk image and kernel...")
+    #use os.system instead of subprocess.run because the script is interactive
+    os.system(f"docker run --rm -v \"{cwd}/{gem5_wd}:/gem5\" -it {gem5_dev} install-system")
 
 ##GEM5 BUILD
 #build the simulator (currently set to ARM 4-core)
@@ -120,7 +126,8 @@ subprocess.run(["docker", "run", "--rm", "-v", f"{cwd}/{gem5_wd}:/gem5", "-it", 
 print("Performing test-run of gem5 simulator in se mode...")
 subprocess.run(["docker", "run", "--rm", "-v", f"{cwd}/{gem5_wd}:/gem5", "-it", gem5_dev, "run-se"])
 #perform a test-run of the simulator in full-system mode (hello world)
-#print("Performing test-run of simulator in fs mode...")
-#subprocess.run(["docker", "run", "--rm", "-v", f"{cwd}/{gem5_wd}:/gem5", "-it", gem5_dev, "run-fs"])
+if full_system:
+    print("Performing test-run of simulator in fs mode...")
+    subprocess.run(["docker", "run", "--rm", "-v", f"{cwd}/{gem5_wd}:/gem5", "-it", gem5_dev, "run-fs"])
 
 
