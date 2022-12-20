@@ -1,5 +1,5 @@
-//This is a simple matrix multiplication program that can be used to test the gem5 simulator.
-//The original author of this program is Jason Lowe-Power
+//This is a simple hello world program that can be used to test the gem5 simulator.
+//The original author of this program is 
 //The editor of this program is Justin Perona
 //The repository is available here: https://github.com/jlpteaching/ECS201A/blob/master/hw2/hw2.rst
 #include <iomanip>
