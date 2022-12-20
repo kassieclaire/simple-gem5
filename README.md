@@ -69,7 +69,7 @@ After running a syscall emulation simulation, GEM5 produces a statistics file co
 
 2. Use the process_stats.py script to gather basic information about the simulation, including cycle count, instruction count, and simulator operations count.
 
-To gather more information see the stats.txt file in the stats directory. Check the process_statss.py file for how the output is tokenized and processed for integer values -- different tokenization will be needed for float values.
+To gather more information see the stats.txt file in the stats directory. Check the process_statss.py file for how the output is tokenized and processed for float values. If you would like integer values, you will have to process the values after.
 
 ## Maintenance and Expansion
 Some key files to note for maintenance and expansion of this project include:
